@@ -96,7 +96,7 @@ export default function ProfileScreen() {
                             username, 
                             full_name:fullname, 
                             website, 
-                            avatar_url:avatarUrl
+                            avatar_url:url
                         })
                     }}                
                 />

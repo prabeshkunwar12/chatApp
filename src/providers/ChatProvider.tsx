@@ -3,6 +3,7 @@ import { ActivityIndicator } from 'react-native';
 import { StreamChat } from 'stream-chat';
 import { Chat, OverlayProvider } from 'stream-chat-expo';
 import { useAuth } from './AuthProvider';
+import { supabase } from '../lib/supabase';
 
 const client = StreamChat.getInstance(process.env.EXPO_PUBLIC_STREAM_API_KEY);
 
@@ -16,7 +17,7 @@ export default function ChatProvider({children}: PropsWithChildren) {
 				{
 					id: profile.id,
 					name: profile.full_name,
-					image: 'https://i.imgur.com/fR9Jz14.png',
+					image: supabase.storage.from('avatars').getPublicUrl(profile.avatar_url).data.publicUrl,
 				},
 				client.devToken(profile.id),
 			);
