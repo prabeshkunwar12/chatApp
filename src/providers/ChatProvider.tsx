@@ -4,6 +4,7 @@ import { StreamChat } from 'stream-chat';
 import { Chat, OverlayProvider } from 'stream-chat-expo';
 import { useAuth } from './AuthProvider';
 import { supabase } from '../lib/supabase';
+import { tokenProvider } from '../utils/tokenProvider';
 
 const client = StreamChat.getInstance(process.env.EXPO_PUBLIC_STREAM_API_KEY);
 
@@ -19,7 +20,7 @@ export default function ChatProvider({children}: PropsWithChildren) {
 					name: profile.full_name,
 					image: supabase.storage.from('avatars').getPublicUrl(profile.avatar_url).data.publicUrl,
 				},
-				client.devToken(profile.id),
+				tokenProvider
 			);
             setIsReady(true);
 			// //once the channel is created, we don't need to create it again and again
